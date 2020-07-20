@@ -1,0 +1,21 @@
+language: generic
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t tenzan/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true tenzan/react-test npm run test
+
+after_success:
+  - docker build -t tenzan/complex-client ./client
+  - docker build -t tenzan/complex-nginx ./nginx
+  - docker build -t tenzan/complex-server ./server
+  - docker build -t tenzan/complex-worker ./worker
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker push tenzan/complex-client
+  - docker push tenzan/complex-nginx
+  - docker push tenzan/complex-server
+  - docker push tenzan/complex-worker
