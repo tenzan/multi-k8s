@@ -10,12 +10,12 @@ script:
   - docker run -e CI=true tenzan/react-test npm run test
 
 after_success:
-  - docker build -t tenzan/complex-client ./client
-  - docker build -t tenzan/complex-nginx ./nginx
-  - docker build -t tenzan/complex-server ./server
-  - docker build -t tenzan/complex-worker ./worker
+  - docker build -t tenzan/multi-client ./client
+  - docker build -t tenzan/multi-nginx ./nginx
+  - docker build -t tenzan/multi-server ./server
+  - docker build -t tenzan/multi-worker ./worker
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-  - docker push tenzan/complex-client
-  - docker push tenzan/complex-nginx
-  - docker push tenzan/complex-server
-  - docker push tenzan/complex-worker
+  - docker push tenzan/multi-client
+  - docker push tenzan/multi-nginx
+  - docker push tenzan/multi-server
+  - docker push tenzan/multi-worker

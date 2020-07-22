@@ -2,23 +2,23 @@
     "AWSEBDockerrunVersion": 2,
     "containerDefinitions": [{
             "name": "client",
-            "image": "tenzan/complex-client",
+            "image": "tenzan/multi-client",
             "hostname": "client",
             "essential": false
         },
         {
             "name": "server",
-            "image": "tenzan/complex-server",
+            "image": "tenzan/multi-server",
             "hostname": "api",
             "essential": false
         },
         {
             "name": "worker",
-            "image": "tenzan/complex-worker",
+            "image": "tenzan/multi-worker",
             "essential": false
         }, {
             "name": "nginx",
-            "image": "tenzan/complex-nginx",
+            "image": "tenzan/multi-nginx",
             "essential": true,
             "portMappings": [{
                 "hostPort": 80,
