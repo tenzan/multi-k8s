@@ -1,32 +1,38 @@
 {
-    "AWSEBDockerrunVersion": 2,
-    "containerDefinitions": [{
-            "name": "client",
-            "image": "tenzan/multi-client",
-            "hostname": "client",
-            "essential": false
-        },
+  "AWSEBDockerrunVersion": 2,
+  "containerDefinitions": [
+    {
+      "name": "client",
+      "image": "tenzan/multi-client",
+      "hostname": "client",
+      "essential": false,
+      "memory": 128
+    },
+    {
+      "name": "server",
+      "image": "tenzan/multi-server",
+      "hostname": "api",
+      "essential": false,
+      "memory": 128
+    },
+    {
+      "name": "worker",
+      "image": "tenzan/multi-worker",
+      "essential": false,
+      "memory": 128
+    },
+    {
+      "name": "nginx",
+      "image": "tenzan/multi-nginx",
+      "essential": true,
+      "portMappings": [
         {
-            "name": "server",
-            "image": "tenzan/multi-server",
-            "hostname": "api",
-            "essential": false
-        },
-        {
-            "name": "worker",
-            "image": "tenzan/multi-worker",
-            "essential": false
-        }, {
-            "name": "nginx",
-            "image": "tenzan/multi-nginx",
-            "essential": true,
-            "portMappings": [{
-                "hostPort": 80,
-                "containerPort": 80
-            }],
-            "links": [
-                "client", "server"
-            ]
+          "hostPort": 80,
+          "containerPort": 80
         }
-    ]
+      ],
+      "links": ["client", "server"],
+      "memory": 128
+    }
+  ]
 }
